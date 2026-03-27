@@ -1,0 +1,135 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36" version="29.6.6">
+  <diagram name="M1+M2+M3 - Bridge" id="eAik-NR9WK7Mtxd6IEcP">
+    <mxGraphModel dx="1895" dy="1045" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="NZkKkOdBergOlb1whije-365" parent="1" style="swimlane;startSize=20;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=9;" value="LogLevel" vertex="1">
+          <mxGeometry height="130" width="120" x="255.9230581430288" y="1172.3845900315505" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-366" parent="NZkKkOdBergOlb1whije-365" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" value="«enum»&#xa;DEBUG=0 / INFO=1&#xa;WARNING=2 / ERROR=3&#xa;&#xa;+ getPriority():int&#xa;+ getLabel():String" vertex="1">
+          <mxGeometry height="104" width="120" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-367" parent="1" style="swimlane;startSize=20;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=9;" value="LogConfiguration" vertex="1">
+          <mxGeometry height="170" width="220" x="395.9230581430288" y="1182.3845900315505" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-368" parent="NZkKkOdBergOlb1whije-367" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" value="«singleton»&#xa;- instance: LogConfiguration {static}&#xa;- minimumLevel: LogLevel&#xa;- messageFormat: String&#xa;- activeDestinations: Set&#xa;- activeFilters: Set&#xa;&#xa;- LogConfiguration() {private}&#xa;+ getInstance(): LogConfiguration&#xa;+ isLevelActive(level): boolean&#xa;+ setMinimumLevel(level): void" vertex="1">
+          <mxGeometry height="144" width="220" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-369" edge="1" parent="1" source="NZkKkOdBergOlb1whije-367" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#666;fontSize=8;" target="NZkKkOdBergOlb1whije-365" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-370" parent="1" style="swimlane;startSize=20;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1+2;fontSize=9;" value="LogCreator" vertex="1">
+          <mxGeometry height="130" width="200" x="635.9230581430288" y="1182.3845900315505" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-371" parent="NZkKkOdBergOlb1whije-370" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" value="«abstract creator»&#xa;# config: LogConfiguration&#xa;&#xa;«abstract»&#xa;+ createLog(msg,cat): LogRecord&#xa;+ getLevel(): LogLevel&#xa;+ buildLog(msg,cat): LogRecord&#xa;  {template method}" vertex="1">
+          <mxGeometry height="104" width="200" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-372" parent="1" style="swimlane;startSize=20;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=9;" value="LogRecord" vertex="1">
+          <mxGeometry height="150" width="180" x="855.9230581430288" y="1182.3845900315505" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-373" parent="NZkKkOdBergOlb1whije-372" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" value="«product»&#xa;- level: LogLevel&#xa;- message: String&#xa;- category: String&#xa;- timestamp: LocalDateTime&#xa;&#xa;+ format(pattern): String&#xa;+ getLevel(): LogLevel&#xa;+ getCategory(): String" vertex="1">
+          <mxGeometry height="124" width="180" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-374" parent="1" style="swimlane;startSize=20;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=9;" value="LogFactory" vertex="1">
+          <mxGeometry height="110" width="180" x="1055.9230581430288" y="1182.3845900315505" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-375" parent="NZkKkOdBergOlb1whije-374" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" value="«facade»&#xa;- debugCreator&#xa;- infoCreator / warningCreator&#xa;- errorCreator&#xa;&#xa;+ create(level,msg,cat)" vertex="1">
+          <mxGeometry height="84" width="180" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-376" edge="1" parent="1" source="NZkKkOdBergOlb1whije-370" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#6c8ebf;fontSize=8;" target="NZkKkOdBergOlb1whije-372" value="«creates»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-377" edge="1" parent="1" source="NZkKkOdBergOlb1whije-374" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#d6b656;fontSize=8;" target="NZkKkOdBergOlb1whije-370" value="«uses»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-378" edge="1" parent="1" source="NZkKkOdBergOlb1whije-370" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#82b366;fontSize=8;" target="NZkKkOdBergOlb1whije-367" value="M1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-398" parent="1" style="swimlane;startSize=22;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;" value="FormatterPool" vertex="1">
+          <mxGeometry height="260" width="300" x="500.00305814302874" y="1727.6245900315503" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-399" parent="NZkKkOdBergOlb1whije-398" style="text;html=1;fontSize=9;fontStyle=2;align=center;" value="«object pool»" vertex="1">
+          <mxGeometry height="14" width="300" y="22" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-400" parent="NZkKkOdBergOlb1whije-398" style="line;strokeColor=#9673a6;" value="" vertex="1">
+          <mxGeometry height="6" width="300" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-401" parent="NZkKkOdBergOlb1whije-398" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" value="- available : ConcurrentLinkedQueue&lt;MessageFormatter&gt;&#xa;- maxSize : int&#xa;- totalCreated : int" vertex="1">
+          <mxGeometry height="54" width="300" y="46" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-402" parent="NZkKkOdBergOlb1whije-398" style="line;strokeColor=#9673a6;" value="" vertex="1">
+          <mxGeometry height="6" width="300" y="104" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-403" parent="NZkKkOdBergOlb1whije-398" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" value="+ FormatterPool(maxSize : int)&#xa;  {pre-warms pool with 2 instances}&#xa;+ acquire() : MessageFormatter&#xa;  {poll from queue or createNew()}&#xa;+ release(fmt : MessageFormatter) : void&#xa;  {calls reset() then returns to queue}&#xa;- createNew() : MessageFormatter&#xa;  {totalCreated++, new instance}&#xa;+ getAvailableCount() : int&#xa;+ getTotalCreated() : int" vertex="1">
+          <mxGeometry height="146" width="300" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-404" parent="1" style="swimlane;startSize=22;fillColor=#f9dbc8;strokeColor=#d6781e;fontStyle=1;fontSize=11;" value="MessageFormatter" vertex="1">
+          <mxGeometry height="260" width="280" x="1000.0030581430287" y="1567.6245900315503" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-405" parent="NZkKkOdBergOlb1whije-404" style="text;html=1;fontSize=9;fontStyle=2;align=center;" value="«pooled object» + «strategy»" vertex="1">
+          <mxGeometry height="14" width="280" y="22" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-406" parent="NZkKkOdBergOlb1whije-404" style="line;strokeColor=#d6781e;" value="" vertex="1">
+          <mxGeometry height="6" width="280" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-407" parent="NZkKkOdBergOlb1whije-404" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" value="- pattern : String&#xa;- usageCount : int" vertex="1">
+          <mxGeometry height="44" width="280" y="46" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-408" parent="NZkKkOdBergOlb1whije-404" style="line;strokeColor=#d6781e;" value="" vertex="1">
+          <mxGeometry height="6" width="280" y="94" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-409" parent="NZkKkOdBergOlb1whije-404" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" value="+ MessageFormatter(pattern : String)&#xa;+ format(record : LogRecord) : String&#xa;  {usageCount++ then record.format(pattern)}&#xa;+ setPattern(pattern : String) : void&#xa;  {Strategy — swap algorithm at runtime}&#xa;+ reset() : void&#xa;  {resets usageCount for pool reuse}&#xa;+ getPattern() : String&#xa;+ getUsageCount() : int&#xa;+ toString() : String" vertex="1">
+          <mxGeometry height="156" width="280" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-410" edge="1" parent="1" source="NZkKkOdBergOlb1whije-398" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;strokeColor=#d6781e;fontSize=10;" target="NZkKkOdBergOlb1whije-404" value="acquire() / release()">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-411" edge="1" parent="1" source="NZkKkOdBergOlb1whije-398" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#d6781e;fontSize=9;" target="NZkKkOdBergOlb1whije-404" value="«creates»">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="970.0030581430287" y="1639.6245900315503" />
+              <mxPoint x="990.0030581430287" y="1679.6245900315503" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-412" edge="1" parent="1" source="NZkKkOdBergOlb1whije-404" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#6c8ebf;fontSize=9;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" target="NZkKkOdBergOlb1whije-372" value="format uses M2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="586" y="1430.0045900315504" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-413" edge="1" parent="1" source="NZkKkOdBergOlb1whije-398" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#82b366;fontSize=9;" target="NZkKkOdBergOlb1whije-367" value="reads format M1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="506" y="1580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-414" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="70" width="180" x="295.9230581430288" y="1074.3845778245193" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-415" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;Singleton&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="355.9230581430288" y="1089.3845778245193" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-416" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="70" width="180" x="785.9230581430288" y="1074.3845778245193" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-417" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;Factory&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="845.9230581430288" y="1089.3845778245193" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-422" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="70" width="180" x="890.0030581430287" y="1447.6245778245193" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-423" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;ObjectPool&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="950.0030581430287" y="1462.6245778245193" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-500" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#6c8ebf;fontSize=9;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="NZkKkOdBergOlb1whije-372" value="process uses M2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1790.0000000000005" y="640" as="sourcePoint" />
+            <mxPoint x="1580" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

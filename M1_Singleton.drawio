@@ -1,59 +1,29 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36" version="29.6.6">
-  <diagram name="M1 - Singleton" id="m1">
-    <mxGraphModel dx="1426" dy="757" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+  <diagram name="M1+M2+M3 - Bridge" id="eAik-NR9WK7Mtxd6IEcP">
+    <mxGraphModel dx="1158" dy="639" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="loglevel_header" parent="1" style="swimlane;startSize=22;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=2;fontSize=11;align=center;" value="«enumeration»" vertex="1">
-          <mxGeometry height="30" width="220" x="60" y="80" as="geometry" />
+        <mxCell id="NZkKkOdBergOlb1whije-365" parent="1" style="swimlane;startSize=20;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=9;" value="LogLevel" vertex="1">
+          <mxGeometry height="130" width="120" x="255.9230581430288" y="1172.3845900315505" as="geometry" />
         </mxCell>
-        <mxCell id="loglevel" parent="1" style="swimlane;startSize=26;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=13;align=center;" value="LogLevel" vertex="1">
-          <mxGeometry height="260" width="220" x="60" y="80" as="geometry" />
+        <mxCell id="NZkKkOdBergOlb1whije-366" parent="NZkKkOdBergOlb1whije-365" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" value="«enum»&#xa;DEBUG=0 / INFO=1&#xa;WARNING=2 / ERROR=3&#xa;&#xa;+ getPriority():int&#xa;+ getLabel():String" vertex="1">
+          <mxGeometry height="104" width="120" y="20" as="geometry" />
         </mxCell>
-        <mxCell id="loglevel_sep1" parent="loglevel" style="line;strokeColor=#82b366;" value="" vertex="1">
-          <mxGeometry height="10" width="220" y="56" as="geometry" />
+        <mxCell id="NZkKkOdBergOlb1whije-367" parent="1" style="swimlane;startSize=20;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=9;" value="LogConfiguration" vertex="1">
+          <mxGeometry height="170" width="220" x="395.9230581430288" y="1182.3845900315505" as="geometry" />
         </mxCell>
-        <mxCell id="loglevel_vals" parent="loglevel" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;fontSize=12;" value="DEBUG = 0&#xa;INFO = 1&#xa;WARNING = 2&#xa;ERROR = 3" vertex="1">
-          <mxGeometry height="80" width="220" y="66" as="geometry" />
+        <mxCell id="NZkKkOdBergOlb1whije-368" parent="NZkKkOdBergOlb1whije-367" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" value="«singleton»&#xa;- instance: LogConfiguration {static}&#xa;- minimumLevel: LogLevel&#xa;- messageFormat: String&#xa;- activeDestinations: Set&#xa;- activeFilters: Set&#xa;&#xa;- LogConfiguration() {private}&#xa;+ getInstance(): LogConfiguration&#xa;+ isLevelActive(level): boolean&#xa;+ setMinimumLevel(level): void" vertex="1">
+          <mxGeometry height="144" width="220" y="20" as="geometry" />
         </mxCell>
-        <mxCell id="loglevel_sep2" parent="loglevel" style="line;strokeColor=#82b366;" value="" vertex="1">
-          <mxGeometry height="10" width="220" y="150" as="geometry" />
-        </mxCell>
-        <mxCell id="loglevel_methods" parent="loglevel" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;fontSize=12;" value="+ getPriority() : int&#xa;+ getLabel() : String&#xa;+ toString() : String" vertex="1">
-          <mxGeometry height="90" width="220" y="160" as="geometry" />
-        </mxCell>
-        <mxCell id="logconfig_stereo" parent="1" style="swimlane;startSize=22;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=2;fontSize=11;align=center;" value="«singleton»" vertex="1">
-          <mxGeometry height="30" width="440" x="380" y="80" as="geometry" />
-        </mxCell>
-        <mxCell id="logconfig" parent="1" style="swimlane;startSize=26;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=13;align=center;" value="LogConfiguration" vertex="1">
-          <mxGeometry height="400" width="440" x="380" y="80" as="geometry" />
-        </mxCell>
-        <mxCell id="logconfig_sep1" parent="logconfig" style="line;strokeColor=#9673a6;" value="" vertex="1">
-          <mxGeometry height="10" width="440" y="56" as="geometry" />
-        </mxCell>
-        <mxCell id="logconfig_attrs" parent="logconfig" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;fontSize=12;" value="- instance : LogConfiguration  {static volatile}&#xa;- minimumLevel : LogLevel&#xa;- messageFormat : String&#xa;- activeDestinations : Set&lt;String&gt;&#xa;- activeFilters : Set&lt;String&gt;&#xa;- timestampEnabled : boolean&#xa;- dateFormat : String" vertex="1">
-          <mxGeometry height="140" width="440" y="66" as="geometry" />
-        </mxCell>
-        <mxCell id="logconfig_sep2" parent="logconfig" style="line;strokeColor=#9673a6;" value="" vertex="1">
-          <mxGeometry height="10" width="440" y="210" as="geometry" />
-        </mxCell>
-        <mxCell id="logconfig_methods" parent="logconfig" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;fontSize=12;" value="- LogConfiguration()  {private — impede instanciação externa}&#xa;+ getInstance() : LogConfiguration  {static — Double-Checked Locking}&#xa;+ getMinimumLevel() : LogLevel&#xa;+ setMinimumLevel(level : LogLevel) : void&#xa;+ getMessageFormat() : String&#xa;+ setMessageFormat(format : String) : void&#xa;+ addDestination(dest : String) : void&#xa;+ removeDestination(dest : String) : void&#xa;+ getActiveDestinations() : Set&lt;String&gt;&#xa;+ addFilter(filter : String) : void&#xa;+ isTimestampEnabled() : boolean&#xa;+ isLevelActive(level : LogLevel) : boolean" vertex="1">
-          <mxGeometry height="170" width="440" y="220" as="geometry" />
-        </mxCell>
-        <mxCell id="rlw3OpHFcNK1gm60wjdA-5" edge="1" parent="logconfig" source="logconfig_attrs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="logconfig_methods">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="480" y="98" as="sourcePoint" />
-            <mxPoint x="480" y="302" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="rlw3OpHFcNK1gm60wjdA-3" edge="1" parent="1" source="loglevel_methods" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" target="logconfig_methods">
+        <mxCell id="NZkKkOdBergOlb1whije-369" edge="1" parent="1" source="NZkKkOdBergOlb1whije-367" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#666;fontSize=8;" target="NZkKkOdBergOlb1whije-365" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="rlw3OpHFcNK1gm60wjdA-4" edge="1" parent="1" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;" value="">
-          <mxGeometry height="50" relative="1" width="50" as="geometry">
-            <mxPoint x="700" y="420" as="sourcePoint" />
-            <mxPoint x="750" y="370" as="targetPoint" />
-          </mxGeometry>
+        <mxCell id="NZkKkOdBergOlb1whije-414" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="70" width="180" x="295.9230581430288" y="1074.3845778245193" as="geometry" />
+        </mxCell>
+        <mxCell id="NZkKkOdBergOlb1whije-415" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 36px;&quot;&gt;Singleton&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="355.9230581430288" y="1089.3845778245193" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
