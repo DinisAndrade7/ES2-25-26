@@ -1,0 +1,169 @@
+<mxfile host="drawio">
+  <diagram name="M1+M2+M3+M4 - Composite" id="m1m2m3m4">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ████ M1 compact ████ -->
+        <mxCell id="m1_label" value="M1 — Singleton" style="text;html=1;fontSize=12;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;align=center;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="200" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="loglevel" value="LogLevel" style="swimlane;startSize=22;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="54" width="140" height="170" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_s" value="«enumeration»" style="text;html=1;fontSize=9;fontStyle=2;align=center;" vertex="1" parent="loglevel"><mxGeometry x="0" y="22" width="140" height="14" as="geometry"/></mxCell>
+        <mxCell id="ll_sep1" value="" style="line;strokeColor=#82b366;" vertex="1" parent="loglevel"><mxGeometry x="0" y="40" width="140" height="6" as="geometry"/></mxCell>
+        <mxCell id="ll_v" value="DEBUG=0 / INFO=1&#xa;WARNING=2 / ERROR=3" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="loglevel"><mxGeometry x="0" y="46" width="140" height="36" as="geometry"/></mxCell>
+        <mxCell id="ll_sep2" value="" style="line;strokeColor=#82b366;" vertex="1" parent="loglevel"><mxGeometry x="0" y="86" width="140" height="6" as="geometry"/></mxCell>
+        <mxCell id="ll_m" value="+ getPriority() : int&#xa;+ getLabel() : String" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="loglevel"><mxGeometry x="0" y="92" width="140" height="72" as="geometry"/></mxCell>
+
+        <mxCell id="logconfig" value="LogConfiguration" style="swimlane;startSize=22;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="200" y="54" width="260" height="220" as="geometry"/>
+        </mxCell>
+        <mxCell id="lc_s" value="«singleton»" style="text;html=1;fontSize=9;fontStyle=2;align=center;" vertex="1" parent="logconfig"><mxGeometry x="0" y="22" width="260" height="14" as="geometry"/></mxCell>
+        <mxCell id="lc_sep1" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="logconfig"><mxGeometry x="0" y="40" width="260" height="6" as="geometry"/></mxCell>
+        <mxCell id="lc_a" value="- instance : LogConfiguration  {static}&#xa;- minimumLevel : LogLevel&#xa;- messageFormat : String&#xa;- activeDestinations : Set&lt;String&gt;&#xa;- activeFilters : Set&lt;String&gt;" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="logconfig"><mxGeometry x="0" y="46" width="260" height="88" as="geometry"/></mxCell>
+        <mxCell id="lc_sep2" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="logconfig"><mxGeometry x="0" y="138" width="260" height="6" as="geometry"/></mxCell>
+        <mxCell id="lc_m" value="- LogConfiguration()  {private}&#xa;+ getInstance() : LogConfiguration&#xa;+ setMinimumLevel(level) : void&#xa;+ isLevelActive(level) : boolean&#xa;+ addDestination(dest) : void" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="logconfig"><mxGeometry x="0" y="144" width="260" height="70" as="geometry"/></mxCell>
+        <mxCell id="m1_uses" value="«uses»" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#666;fontSize=9;" edge="1" parent="1" source="logconfig" target="loglevel"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ████ M2 compact ████ -->
+        <mxCell id="m2_label" value="M2 — Factory Method" style="text;html=1;fontSize=12;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=center;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="20" width="560" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="logcreator" value="LogCreator" style="swimlane;startSize=22;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1+2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="480" y="54" width="240" height="170" as="geometry"/>
+        </mxCell>
+        <mxCell id="lcr_s" value="«abstract creator»" style="text;html=1;fontSize=9;fontStyle=2;align=center;" vertex="1" parent="logcreator"><mxGeometry x="0" y="22" width="240" height="14" as="geometry"/></mxCell>
+        <mxCell id="lcr_sep1" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="logcreator"><mxGeometry x="0" y="40" width="240" height="6" as="geometry"/></mxCell>
+        <mxCell id="lcr_a" value="# config : LogConfiguration" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="logcreator"><mxGeometry x="0" y="46" width="240" height="22" as="geometry"/></mxCell>
+        <mxCell id="lcr_sep2" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="logcreator"><mxGeometry x="0" y="72" width="240" height="6" as="geometry"/></mxCell>
+        <mxCell id="lcr_m" value="«abstract»&#xa;+ createLog(msg, cat) : LogRecord&#xa;+ getLevel() : LogLevel&#xa;+ buildLog(msg, cat) : LogRecord&#xa;  {template method}" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="logcreator"><mxGeometry x="0" y="78" width="240" height="86" as="geometry"/></mxCell>
+
+        <mxCell id="logfactory" value="LogFactory" style="swimlane;startSize=22;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="740" y="54" width="200" height="140" as="geometry"/>
+        </mxCell>
+        <mxCell id="lf_s" value="«facade»" style="text;html=1;fontSize=9;fontStyle=2;align=center;" vertex="1" parent="logfactory"><mxGeometry x="0" y="22" width="200" height="14" as="geometry"/></mxCell>
+        <mxCell id="lf_sep" value="" style="line;strokeColor=#d6b656;" vertex="1" parent="logfactory"><mxGeometry x="0" y="40" width="200" height="6" as="geometry"/></mxCell>
+        <mxCell id="lf_m" value="+ create(level,msg,cat) : LogRecord&#xa;+ debug / info / warning / error()" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="logfactory"><mxGeometry x="0" y="46" width="200" height="88" as="geometry"/></mxCell>
+
+        <mxCell id="logrecord" value="LogRecord" style="swimlane;startSize=22;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="960" y="54" width="200" height="190" as="geometry"/>
+        </mxCell>
+        <mxCell id="lr_s" value="«product»" style="text;html=1;fontSize=9;fontStyle=2;align=center;" vertex="1" parent="logrecord"><mxGeometry x="0" y="22" width="200" height="14" as="geometry"/></mxCell>
+        <mxCell id="lr_sep1" value="" style="line;strokeColor=#6c8ebf;" vertex="1" parent="logrecord"><mxGeometry x="0" y="40" width="200" height="6" as="geometry"/></mxCell>
+        <mxCell id="lr_a" value="- level : LogLevel&#xa;- message : String&#xa;- category : String&#xa;- timestamp : LocalDateTime" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="logrecord"><mxGeometry x="0" y="46" width="200" height="72" as="geometry"/></mxCell>
+        <mxCell id="lr_sep2" value="" style="line;strokeColor=#6c8ebf;" vertex="1" parent="logrecord"><mxGeometry x="0" y="122" width="200" height="6" as="geometry"/></mxCell>
+        <mxCell id="lr_m" value="+ format(pattern) : String&#xa;+ getLevel() : LogLevel&#xa;+ getCategory() : String" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="logrecord"><mxGeometry x="0" y="128" width="200" height="56" as="geometry"/></mxCell>
+
+        <mxCell id="m2r1" value="«uses»" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#d6b656;fontSize=9;" edge="1" parent="1" source="logfactory" target="logcreator"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="m2r2" value="«creates»" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#6c8ebf;fontSize=9;" edge="1" parent="1" source="logcreator" target="logrecord"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="m2r3" value="«uses» M1" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#82b366;fontSize=9;" edge="1" parent="1" source="logcreator" target="logconfig"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ████ M3 compact ████ -->
+        <mxCell id="m3_label" value="M3 — Bridge: Destinos" style="text;html=1;fontSize=12;fontStyle=1;fillColor=#fff2cc;strokeColor=#d6b656;align=center;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="300" width="620" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="logdest" value="LogDestination" style="swimlane;startSize=22;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="200" y="334" width="240" height="150" as="geometry"/>
+        </mxCell>
+        <mxCell id="ld_s" value="«interface»" style="text;html=1;fontSize=9;fontStyle=2;align=center;" vertex="1" parent="logdest"><mxGeometry x="0" y="22" width="240" height="14" as="geometry"/></mxCell>
+        <mxCell id="ld_sep" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="logdest"><mxGeometry x="0" y="40" width="240" height="6" as="geometry"/></mxCell>
+        <mxCell id="ld_m" value="+ write(record, formattedMsg) : void&#xa;+ getName() : String&#xa;+ isAvailable() : boolean&#xa;+ close() : void" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="logdest"><mxGeometry x="0" y="46" width="240" height="98" as="geometry"/></mxCell>
+
+        <mxCell id="consdest" value="ConsoleDestination" style="swimlane;startSize=20;fillColor=#f5f5f5;strokeColor=#666;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="540" width="160" height="84" as="geometry"/>
+        </mxCell>
+        <mxCell id="cd_m" value="+ write() {stdout/stderr}&#xa;+ getName() : CONSOLE" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="consdest"><mxGeometry x="0" y="30" width="160" height="48" as="geometry"/></mxCell>
+
+        <mxCell id="filedest" value="FileDestination" style="swimlane;startSize=20;fillColor=#f5f5f5;strokeColor=#666;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="220" y="540" width="160" height="84" as="geometry"/>
+        </mxCell>
+        <mxCell id="fd_m" value="- filePath / writer&#xa;+ write() {append}&#xa;+ close()" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="filedest"><mxGeometry x="0" y="30" width="160" height="48" as="geometry"/></mxCell>
+
+        <mxCell id="dbdest" value="DatabaseDestination" style="swimlane;startSize=20;fillColor=#f5f5f5;strokeColor=#666;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="400" y="540" width="160" height="84" as="geometry"/>
+        </mxCell>
+        <mxCell id="dbd_m" value="- connStr / buffer&#xa;+ write() {INSERT}&#xa;+ close()" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="dbdest"><mxGeometry x="0" y="30" width="160" height="48" as="geometry"/></mxCell>
+
+        <mxCell id="remdest" value="RemoteServiceDestination" style="swimlane;startSize=20;fillColor=#f5f5f5;strokeColor=#666;fontStyle=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="580" y="540" width="180" height="84" as="geometry"/>
+        </mxCell>
+        <mxCell id="rd_m" value="- endpoint&#xa;+ write() {HTTP POST}&#xa;+ close()" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="remdest"><mxGeometry x="0" y="30" width="180" height="48" as="geometry"/></mxCell>
+
+        <mxCell id="m3r1" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#9673a6;" edge="1" parent="1" source="consdest" target="logdest"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="m3r2" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#9673a6;" edge="1" parent="1" source="filedest" target="logdest"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="m3r3" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#9673a6;" edge="1" parent="1" source="dbdest" target="logdest"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="m3r4" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#9673a6;" edge="1" parent="1" source="remdest" target="logdest"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="m3r5" value="uses M2" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#6c8ebf;fontSize=9;" edge="1" parent="1" source="logdest" target="logrecord"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ████ M4 COMPOSITE ████ -->
+        <mxCell id="m4_label" value="M4 — Composite: Estruturação de Registos" style="text;html=1;fontSize=13;fontStyle=1;fillColor=#f8cecc;strokeColor=#b85450;align=center;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="800" y="300" width="500" height="26" as="geometry"/>
+        </mxCell>
+
+        <!-- LogComponent interface -->
+        <mxCell id="logcomp" value="LogComponent" style="swimlane;startSize=22;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="940" y="336" width="260" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="lcomp_s" value="«interface»" style="text;html=1;fontSize=9;fontStyle=2;align=center;" vertex="1" parent="logcomp"><mxGeometry x="0" y="22" width="260" height="14" as="geometry"/></mxCell>
+        <mxCell id="lcomp_sep" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="logcomp"><mxGeometry x="0" y="40" width="260" height="6" as="geometry"/></mxCell>
+        <mxCell id="lcomp_m" value="+ getName() : String&#xa;+ process() : void&#xa;+ getRecords() : List&lt;LogRecord&gt;&#xa;+ accept(visitor : LogVisitor) : void" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="logcomp"><mxGeometry x="0" y="46" width="260" height="128" as="geometry"/></mxCell>
+
+        <!-- LogVisitor interface -->
+        <mxCell id="logvisitor" value="LogVisitor" style="swimlane;startSize=22;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="336" width="200" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="lv_s" value="«interface»" style="text;html=1;fontSize=9;fontStyle=2;align=center;" vertex="1" parent="logvisitor"><mxGeometry x="0" y="22" width="200" height="14" as="geometry"/></mxCell>
+        <mxCell id="lv_sep" value="" style="line;strokeColor=#d6b656;" vertex="1" parent="logvisitor"><mxGeometry x="0" y="40" width="200" height="6" as="geometry"/></mxCell>
+        <mxCell id="lv_m" value="+ visitLeaf(leaf : LogLeaf) : void&#xa;+ visitCategory(cat : LogCategory)" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="logvisitor"><mxGeometry x="0" y="46" width="200" height="68" as="geometry"/></mxCell>
+
+        <!-- LogLeaf -->
+        <mxCell id="logleaf" value="LogLeaf" style="swimlane;startSize=22;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="800" y="580" width="240" height="180" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_stereo2" value="«leaf»" style="text;html=1;fontSize=9;fontStyle=2;align=center;" vertex="1" parent="logleaf"><mxGeometry x="0" y="22" width="240" height="14" as="geometry"/></mxCell>
+        <mxCell id="ll_sep1b" value="" style="line;strokeColor=#b85450;" vertex="1" parent="logleaf"><mxGeometry x="0" y="40" width="240" height="6" as="geometry"/></mxCell>
+        <mxCell id="ll_ab" value="- record : LogRecord" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="logleaf"><mxGeometry x="0" y="46" width="240" height="24" as="geometry"/></mxCell>
+        <mxCell id="ll_sep2b" value="" style="line;strokeColor=#b85450;" vertex="1" parent="logleaf"><mxGeometry x="0" y="74" width="240" height="6" as="geometry"/></mxCell>
+        <mxCell id="ll_mb" value="+ getName() : String&#xa;+ process() : void&#xa;  {prints record to output}&#xa;+ getRecords() : List (singleton)&#xa;+ accept(visitor) : void" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="logleaf"><mxGeometry x="0" y="80" width="240" height="94" as="geometry"/></mxCell>
+
+        <!-- LogCategory -->
+        <mxCell id="logcat" value="LogCategory" style="swimlane;startSize=22;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="580" width="280" height="230" as="geometry"/>
+        </mxCell>
+        <mxCell id="lc_stereo2" value="«composite»" style="text;html=1;fontSize=9;fontStyle=2;align=center;" vertex="1" parent="logcat"><mxGeometry x="0" y="22" width="280" height="14" as="geometry"/></mxCell>
+        <mxCell id="lc_sep1b" value="" style="line;strokeColor=#b85450;" vertex="1" parent="logcat"><mxGeometry x="0" y="40" width="280" height="6" as="geometry"/></mxCell>
+        <mxCell id="lc_ab" value="- name : String&#xa;- children : List&lt;LogComponent&gt;" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="logcat"><mxGeometry x="0" y="46" width="280" height="44" as="geometry"/></mxCell>
+        <mxCell id="lc_sep2b" value="" style="line;strokeColor=#b85450;" vertex="1" parent="logcat"><mxGeometry x="0" y="94" width="280" height="6" as="geometry"/></mxCell>
+        <mxCell id="lc_mb" value="+ add(component : LogComponent) : void&#xa;+ remove(component : LogComponent) : void&#xa;+ getChildren() : List&lt;LogComponent&gt;&#xa;+ filterByLevel(level : LogLevel) : List&#xa;  {returns records matching level}&#xa;+ getName() : String&#xa;+ process() : void  {iterates children}&#xa;+ getRecords() : List  {recursive}&#xa;+ accept(visitor) : void" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="logcat"><mxGeometry x="0" y="100" width="280" height="126" as="geometry"/></mxCell>
+
+        <!-- M4 relations -->
+        <mxCell id="m4r1" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#9673a6;" edge="1" parent="1" source="logleaf" target="logcomp"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="m4r2" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#9673a6;" edge="1" parent="1" source="logcat" target="logcomp"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <!-- LogCategory aggregates LogComponent (children) -->
+        <mxCell id="m4r3" value="0..*  children" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;startArrow=ERmanyToMany;startFill=0;endFill=0;strokeColor=#b85450;fontSize=9;" edge="1" parent="1" source="logcat" target="logcomp">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1200" y="520"/>
+              <mxPoint x="1070" y="520"/>
+              <mxPoint x="1070" y="426"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <!-- accept uses LogVisitor -->
+        <mxCell id="m4r4" value="«uses»" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#d6b656;fontSize=9;" edge="1" parent="1" source="logcomp" target="logvisitor"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <!-- LogLeaf uses LogRecord (M2) -->
+        <mxCell id="m4r5" value="«uses» M2" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#6c8ebf;fontSize=9;" edge="1" parent="1" source="logleaf" target="logrecord"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <!-- LogCategory uses LogLevel for filter (M1) -->
+        <mxCell id="m4r6" value="filterByLevel uses M1" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#82b366;fontSize=9;" edge="1" parent="1" source="logcat" target="loglevel"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="note_comp" value="Composite Pattern:&#xa;LogCategory trata 1 ou N registos&#xa;de forma uniforme.&#xa;filterByLevel() percorre toda a&#xa;árvore recursivamente.&#xa;accept() suporta Visitor para&#xa;análise externa." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fillColor=#fff2cc;strokeColor=#d6b656;align=left;fontSize=10;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="1360" y="580" width="240" height="130" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

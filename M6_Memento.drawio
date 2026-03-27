@@ -1,0 +1,104 @@
+<mxfile host="drawio">
+  <diagram name="M1-M6 - Memento" id="m1m2m3m4m5m6">
+    <mxGraphModel dx="1600" dy="1300" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ████ M1-M4 summary block ████ -->
+        <mxCell id="prev_bg" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;opacity=30;" vertex="1" parent="1">
+          <mxGeometry x="10" y="10" width="1000" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="prev_title" value="Módulos M1–M4 (resumo)" style="text;html=1;fontSize=11;fontStyle=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="20" y="16" width="220" height="18" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="loglevel" value="LogLevel&#xa;«enum»" style="swimlane;startSize=20;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="20" y="40" width="100" height="62" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_v" value="DEBUG/INFO&#xa;WARNING/ERROR" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" vertex="1" parent="loglevel"><mxGeometry x="0" y="20" width="100" height="36" as="geometry"/></mxCell>
+
+        <mxCell id="logconfig" value="LogConfiguration  «singleton»" style="swimlane;startSize=20;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="140" y="40" width="200" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="lc_v" value="- instance {static volatile}&#xa;- minimumLevel: LogLevel&#xa;- messageFormat: String&#xa;- activeDestinations: Set&#xa;- activeFilters: Set&#xa;- timestampEnabled: boolean&#xa;&#xa;- LogConfiguration() {private}&#xa;+ getInstance(): LogConfiguration&#xa;+ isLevelActive(lvl): boolean&#xa;+ setMinimumLevel(lvl): void&#xa;+ addDestination(dest): void" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" vertex="1" parent="logconfig"><mxGeometry x="0" y="20" width="200" height="134" as="geometry"/></mxCell>
+
+        <mxCell id="logrecord" value="LogRecord  «product»" style="swimlane;startSize=20;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="360" y="40" width="180" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="lr_v" value="- level: LogLevel&#xa;- message: String&#xa;- category: String&#xa;- timestamp: LocalDateTime&#xa;&#xa;+ format(pattern): String&#xa;+ getLevel(): LogLevel" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" vertex="1" parent="logrecord"><mxGeometry x="0" y="20" width="180" height="104" as="geometry"/></mxCell>
+
+        <mxCell id="logdest" value="LogDestination  «interface»" style="swimlane;startSize=20;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="560" y="40" width="180" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="ld_v" value="+ write(record, msg): void&#xa;+ getName(): String&#xa;+ isAvailable(): boolean&#xa;+ close(): void" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" vertex="1" parent="logdest"><mxGeometry x="0" y="20" width="180" height="74" as="geometry"/></mxCell>
+
+        <mxCell id="logcomp" value="LogComponent  «interface»" style="swimlane;startSize=20;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="760" y="40" width="200" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="lcomp_v" value="+ getName(): String&#xa;+ process(): void&#xa;+ getRecords(): List&lt;LogRecord&gt;&#xa;+ accept(v: LogVisitor): void" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" vertex="1" parent="logcomp"><mxGeometry x="0" y="20" width="200" height="74" as="geometry"/></mxCell>
+
+        <mxCell id="formpool_sm" value="FormatterPool  «pool»" style="swimlane;startSize=20;fillColor=#f9dbc8;strokeColor=#d6781e;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="560" y="160" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="fp_v" value="+ acquire() / release()" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" vertex="1" parent="formpool_sm"><mxGeometry x="0" y="20" width="200" height="16" as="geometry"/></mxCell>
+
+        <!-- ████ M6 — MEMENTO ████ -->
+        <mxCell id="m6_label" value="M6 — Memento: Armazenamento de Estado do Sistema de Logs" style="text;html=1;fontSize=13;fontStyle=1;fillColor=#d0e0ff;strokeColor=#3050a0;align=center;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="10" y="230" width="1100" height="26" as="geometry"/>
+        </mxCell>
+
+        <!-- LogSystemOriginator -->
+        <mxCell id="originator" value="LogSystemOriginator" style="swimlane;startSize=22;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="10" y="270" width="340" height="260" as="geometry"/>
+        </mxCell>
+        <mxCell id="orig_s" value="«originator»" style="text;html=1;fontSize=9;fontStyle=2;align=center;" vertex="1" parent="originator"><mxGeometry x="0" y="22" width="340" height="14" as="geometry"/></mxCell>
+        <mxCell id="orig_sep1" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="originator"><mxGeometry x="0" y="40" width="340" height="6" as="geometry"/></mxCell>
+        <mxCell id="orig_a" value="- config : LogConfiguration" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="originator"><mxGeometry x="0" y="46" width="340" height="24" as="geometry"/></mxCell>
+        <mxCell id="orig_sep2" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="originator"><mxGeometry x="0" y="74" width="340" height="6" as="geometry"/></mxCell>
+        <mxCell id="orig_m" value="+ LogSystemOriginator()&#xa;  {injects LogConfiguration.getInstance()}&#xa;&#xa;+ save(label : String) : LogSystemMemento&#xa;  {reads state from LogConfiguration&#xa;   and packs into new Memento}&#xa;&#xa;+ restore(m : LogSystemMemento) : void&#xa;  {unpacks Memento and applies state&#xa;   back to LogConfiguration}&#xa;&#xa;+ getCurrentLevel() : LogLevel&#xa;  {reads from LogConfiguration}" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="originator"><mxGeometry x="0" y="80" width="340" height="176" as="geometry"/></mxCell>
+
+        <!-- LogSystemMemento -->
+        <mxCell id="memento" value="LogSystemMemento" style="swimlane;startSize=22;fillColor=#d0e0ff;strokeColor=#3050a0;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="380" y="270" width="360" height="300" as="geometry"/>
+        </mxCell>
+        <mxCell id="mem_s" value="«memento»" style="text;html=1;fontSize=9;fontStyle=2;align=center;" vertex="1" parent="memento"><mxGeometry x="0" y="22" width="360" height="14" as="geometry"/></mxCell>
+        <mxCell id="mem_sep1" value="" style="line;strokeColor=#3050a0;" vertex="1" parent="memento"><mxGeometry x="0" y="40" width="360" height="6" as="geometry"/></mxCell>
+        <mxCell id="mem_a" value="~ minimumLevel : LogLevel  {package-private}&#xa;~ activeDestinations : Set&lt;String&gt;  {package-private}&#xa;~ activeFilters : Set&lt;String&gt;  {package-private}&#xa;~ messageFormat : String  {package-private}&#xa;~ timestampEnabled : boolean  {package-private}&#xa;- savedAt : LocalDateTime  {private}&#xa;- label : String  {private}" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="memento"><mxGeometry x="0" y="46" width="360" height="120" as="geometry"/></mxCell>
+        <mxCell id="mem_sep2" value="" style="line;strokeColor=#3050a0;" vertex="1" parent="memento"><mxGeometry x="0" y="170" width="360" height="6" as="geometry"/></mxCell>
+        <mxCell id="mem_m" value="~ LogSystemMemento(level, destinations,&#xa;   filters, format, timestamp, label)&#xa;   {package-private — only Originator creates}&#xa;&#xa;~ getMinimumLevel() : LogLevel  {pkg-private}&#xa;~ getActiveDestinations() : Set  {pkg-private}&#xa;~ getActiveFilters() : Set  {pkg-private}&#xa;~ getMessageFormat() : String  {pkg-private}&#xa;~ isTimestampEnabled() : boolean  {pkg-private}&#xa;&#xa;+ getSavedAt() : LocalDateTime  {public}&#xa;+ getLabel() : String  {public — metadata only}&#xa;+ toString() : String" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="memento"><mxGeometry x="0" y="176" width="360" height="120" as="geometry"/></mxCell>
+
+        <!-- LogSystemCaretaker -->
+        <mxCell id="caretaker" value="LogSystemCaretaker" style="swimlane;startSize=22;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="760" y="270" width="340" height="300" as="geometry"/>
+        </mxCell>
+        <mxCell id="ct_s" value="«caretaker»" style="text;html=1;fontSize=9;fontStyle=2;align=center;" vertex="1" parent="caretaker"><mxGeometry x="0" y="22" width="340" height="14" as="geometry"/></mxCell>
+        <mxCell id="ct_sep1" value="" style="line;strokeColor=#d6b656;" vertex="1" parent="caretaker"><mxGeometry x="0" y="40" width="340" height="6" as="geometry"/></mxCell>
+        <mxCell id="ct_a" value="- originator : LogSystemOriginator&#xa;- history : Deque&lt;LogSystemMemento&gt;&#xa;- future : Deque&lt;LogSystemMemento&gt;" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="caretaker"><mxGeometry x="0" y="46" width="340" height="54" as="geometry"/></mxCell>
+        <mxCell id="ct_sep2" value="" style="line;strokeColor=#d6b656;" vertex="1" parent="caretaker"><mxGeometry x="0" y="104" width="340" height="6" as="geometry"/></mxCell>
+        <mxCell id="ct_m" value="+ LogSystemCaretaker(originator)&#xa;&#xa;+ checkpoint(label : String) : void&#xa;  {calls originator.save() → push to history&#xa;   clears future stack (invalidates redo)}&#xa;&#xa;+ undo() : boolean&#xa;  {push current to future, pop history,&#xa;   calls originator.restore(previous)}&#xa;&#xa;+ redo() : boolean&#xa;  {push current to history, pop future,&#xa;   calls originator.restore(next)}&#xa;&#xa;+ getHistory() : List&lt;LogSystemMemento&gt;&#xa;+ getHistorySize() : int" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="caretaker"><mxGeometry x="0" y="110" width="340" height="186" as="geometry"/></mxCell>
+
+        <!-- M6 Relations -->
+        <!-- Originator creates Memento -->
+        <mxCell id="m6r1" value="«creates»" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#3050a0;fontSize=10;" edge="1" parent="1" source="originator" target="memento"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <!-- Originator reads/writes LogConfiguration (M1) -->
+        <mxCell id="m6r2" value="reads/writes M1" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#82b366;fontSize=9;" edge="1" parent="1" source="originator" target="logconfig"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <!-- Caretaker uses Originator -->
+        <mxCell id="m6r3" value="«uses»" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;strokeColor=#d6b656;fontSize=10;" edge="1" parent="1" source="caretaker" target="originator"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <!-- Caretaker stores Memento -->
+        <mxCell id="m6r4" value="stores" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;strokeColor=#3050a0;fontSize=10;" edge="1" parent="1" source="caretaker" target="memento"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Memento encapsulation note -->
+        <mxCell id="note_mem" value="Memento Pattern — Encapsulamento:&#xa;• ~ (package-private) = apenas Originator acede&#xa;• + (public) = apenas metadados (label, savedAt)&#xa;• Caretaker NUNCA lê o conteúdo do Memento&#xa;• Originator é o único que sabe como criar/restaurar&#xa;&#xa;Undo/Redo com pilhas duplas:&#xa;• checkpoint() → push history, clear future&#xa;• undo()       → push future, pop history, restore&#xa;• redo()       → push history, pop future, restore" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fillColor=#fff2cc;strokeColor=#d6b656;align=left;fontSize=10;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="10" y="590" width="440" height="160" as="geometry"/>
+        </mxCell>
+
+        <!-- Memento state diagram -->
+        <mxCell id="state_note" value="Estado guardado no Memento:&#xa;• minimumLevel (ex: DEBUG → WARNING)&#xa;• activeDestinations (CONSOLE, FILE, DB)&#xa;• activeFilters (filtros ativos)&#xa;• messageFormat (padrão de formatação)&#xa;• timestampEnabled (true/false)&#xa;• savedAt (quando foi guardado)&#xa;• label (identificador descritivo)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fillColor=#d0e0ff;strokeColor=#3050a0;align=left;fontSize=10;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="470" y="590" width="300" height="160" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

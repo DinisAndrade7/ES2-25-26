@@ -1,0 +1,150 @@
+<mxfile host="drawio">
+  <diagram name="M1-M5 - Object Pool" id="m1m2m3m4m5">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ████ M1 ultra-compact ████ -->
+        <mxCell id="m1_label" value="M1 — Singleton" style="text;html=1;fontSize=11;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;align=center;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="10" width="140" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="loglevel" value="LogLevel" style="swimlane;startSize=20;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="20" y="38" width="120" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll_v" value="«enum»&#xa;DEBUG=0 / INFO=1&#xa;WARNING=2 / ERROR=3&#xa;&#xa;+ getPriority():int&#xa;+ getLabel():String" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" vertex="1" parent="loglevel"><mxGeometry x="0" y="20" width="120" height="104" as="geometry"/></mxCell>
+
+        <mxCell id="logconfig" value="LogConfiguration" style="swimlane;startSize=20;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="160" y="38" width="220" height="170" as="geometry"/>
+        </mxCell>
+        <mxCell id="lc_v" value="«singleton»&#xa;- instance: LogConfiguration {static}&#xa;- minimumLevel: LogLevel&#xa;- messageFormat: String&#xa;- activeDestinations: Set&#xa;- activeFilters: Set&#xa;&#xa;- LogConfiguration() {private}&#xa;+ getInstance(): LogConfiguration&#xa;+ isLevelActive(level): boolean&#xa;+ setMinimumLevel(level): void" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" vertex="1" parent="logconfig"><mxGeometry x="0" y="20" width="220" height="144" as="geometry"/></mxCell>
+        <mxCell id="m1_uses" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#666;fontSize=8;" edge="1" parent="1" source="logconfig" target="loglevel"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ████ M2 ultra-compact ████ -->
+        <mxCell id="m2_label" value="M2 — Factory Method" style="text;html=1;fontSize=11;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=center;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="10" width="360" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="logcreator" value="LogCreator" style="swimlane;startSize=20;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1+2;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="400" y="38" width="200" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="lcr_v" value="«abstract creator»&#xa;# config: LogConfiguration&#xa;&#xa;«abstract»&#xa;+ createLog(msg,cat): LogRecord&#xa;+ getLevel(): LogLevel&#xa;+ buildLog(msg,cat): LogRecord&#xa;  {template method}" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" vertex="1" parent="logcreator"><mxGeometry x="0" y="20" width="200" height="104" as="geometry"/></mxCell>
+
+        <mxCell id="logrecord" value="LogRecord" style="swimlane;startSize=20;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="620" y="38" width="180" height="150" as="geometry"/>
+        </mxCell>
+        <mxCell id="lr_v" value="«product»&#xa;- level: LogLevel&#xa;- message: String&#xa;- category: String&#xa;- timestamp: LocalDateTime&#xa;&#xa;+ format(pattern): String&#xa;+ getLevel(): LogLevel&#xa;+ getCategory(): String" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" vertex="1" parent="logrecord"><mxGeometry x="0" y="20" width="180" height="124" as="geometry"/></mxCell>
+
+        <mxCell id="logfactory" value="LogFactory" style="swimlane;startSize=20;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="820" y="38" width="180" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="lf_v" value="«facade»&#xa;- debugCreator&#xa;- infoCreator / warningCreator&#xa;- errorCreator&#xa;&#xa;+ create(level,msg,cat)" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" vertex="1" parent="logfactory"><mxGeometry x="0" y="20" width="180" height="84" as="geometry"/></mxCell>
+
+        <mxCell id="m2r1" value="«creates»" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#6c8ebf;fontSize=8;" edge="1" parent="1" source="logcreator" target="logrecord"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="m2r2" value="«uses»" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#d6b656;fontSize=8;" edge="1" parent="1" source="logfactory" target="logcreator"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="m2r3" value="M1" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#82b366;fontSize=8;" edge="1" parent="1" source="logcreator" target="logconfig"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ████ M3 ultra-compact ████ -->
+        <mxCell id="m3_label" value="M3 — Bridge" style="text;html=1;fontSize=11;fontStyle=1;fillColor=#fff2cc;strokeColor=#d6b656;align=center;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="230" width="260" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="logdest" value="LogDestination" style="swimlane;startSize=20;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="20" y="258" width="200" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="ld_v" value="«interface»&#xa;+ write(record, msg): void&#xa;+ getName(): String&#xa;+ isAvailable(): boolean&#xa;+ close(): void" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" vertex="1" parent="logdest"><mxGeometry x="0" y="20" width="200" height="84" as="geometry"/></mxCell>
+
+        <mxCell id="consdest" value="Console&#xa;Destination" style="swimlane;startSize=20;fillColor=#f5f5f5;strokeColor=#666;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="20" y="420" width="100" height="70" as="geometry"/></mxCell>
+        <mxCell id="filedest" value="File&#xa;Destination" style="swimlane;startSize=20;fillColor=#f5f5f5;strokeColor=#666;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="130" y="420" width="100" height="70" as="geometry"/></mxCell>
+        <mxCell id="dbdest" value="Database&#xa;Destination" style="swimlane;startSize=20;fillColor=#f5f5f5;strokeColor=#666;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="240" y="420" width="110" height="70" as="geometry"/></mxCell>
+        <mxCell id="remdest" value="Remote&#xa;Destination" style="swimlane;startSize=20;fillColor=#f5f5f5;strokeColor=#666;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="360" y="420" width="110" height="70" as="geometry"/></mxCell>
+
+        <mxCell id="m3r1" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#9673a6;" edge="1" parent="1" source="consdest" target="logdest"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="m3r2" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#9673a6;" edge="1" parent="1" source="filedest" target="logdest"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="m3r3" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#9673a6;" edge="1" parent="1" source="dbdest" target="logdest"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="m3r4" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#9673a6;" edge="1" parent="1" source="remdest" target="logdest"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ████ M4 ultra-compact ████ -->
+        <mxCell id="m4_label" value="M4 — Composite" style="text;html=1;fontSize=11;fontStyle=1;fillColor=#f8cecc;strokeColor=#b85450;align=center;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="230" width="280" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="logcomp" value="LogComponent" style="swimlane;startSize=20;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="500" y="258" width="200" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="lcomp_v" value="«interface»&#xa;+ getName(): String&#xa;+ process(): void&#xa;+ getRecords(): List&lt;LogRecord&gt;&#xa;+ accept(v: LogVisitor): void" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" vertex="1" parent="logcomp"><mxGeometry x="0" y="20" width="200" height="84" as="geometry"/></mxCell>
+
+        <mxCell id="logleaf" value="LogLeaf" style="swimlane;startSize=20;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="500" y="420" width="140" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="ll2_v" value="«leaf»&#xa;- record: LogRecord&#xa;&#xa;+ process(): void&#xa;+ getRecords(): List" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" vertex="1" parent="logleaf"><mxGeometry x="0" y="20" width="140" height="64" as="geometry"/></mxCell>
+
+        <mxCell id="logcat" value="LogCategory" style="swimlane;startSize=20;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="660" y="420" width="180" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="lcat_v" value="«composite»&#xa;- name: String&#xa;- children: List&lt;LogComponent&gt;&#xa;&#xa;+ add(component): void&#xa;+ filterByLevel(level): List&#xa;+ process(): void&#xa;+ getRecords(): List {recursive}" style="text;html=1;align=left;spacingLeft=4;fontSize=9;" vertex="1" parent="logcat"><mxGeometry x="0" y="20" width="180" height="104" as="geometry"/></mxCell>
+
+        <mxCell id="m4r1" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#9673a6;" edge="1" parent="1" source="logleaf" target="logcomp"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="m4r2" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;strokeColor=#9673a6;" edge="1" parent="1" source="logcat" target="logcomp"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="m4r3" value="0..*" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;startArrow=ERmanyToMany;startFill=0;endFill=0;strokeColor=#b85450;fontSize=8;" edge="1" parent="1" source="logcat" target="logcomp">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="750" y="400"/>
+              <mxPoint x="600" y="400"/>
+              <mxPoint x="600" y="368"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ████ M5 — OBJECT POOL ████ -->
+        <mxCell id="m5_label" value="M5 — Object Pool: Otimização de Recursos" style="text;html=1;fontSize=13;fontStyle=1;fillColor=#f9dbc8;strokeColor=#d6781e;align=center;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="860" y="230" width="500" height="26" as="geometry"/>
+        </mxCell>
+
+        <!-- FormatterPool -->
+        <mxCell id="formpool" value="FormatterPool" style="swimlane;startSize=22;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="860" y="268" width="300" height="260" as="geometry"/>
+        </mxCell>
+        <mxCell id="fp_s" value="«object pool»" style="text;html=1;fontSize=9;fontStyle=2;align=center;" vertex="1" parent="formpool"><mxGeometry x="0" y="22" width="300" height="14" as="geometry"/></mxCell>
+        <mxCell id="fp_sep1" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="formpool"><mxGeometry x="0" y="40" width="300" height="6" as="geometry"/></mxCell>
+        <mxCell id="fp_a" value="- available : ConcurrentLinkedQueue&lt;MessageFormatter&gt;&#xa;- maxSize : int&#xa;- totalCreated : int" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="formpool"><mxGeometry x="0" y="46" width="300" height="54" as="geometry"/></mxCell>
+        <mxCell id="fp_sep2" value="" style="line;strokeColor=#9673a6;" vertex="1" parent="formpool"><mxGeometry x="0" y="104" width="300" height="6" as="geometry"/></mxCell>
+        <mxCell id="fp_m" value="+ FormatterPool(maxSize : int)&#xa;  {pre-warms pool with 2 instances}&#xa;+ acquire() : MessageFormatter&#xa;  {poll from queue or createNew()}&#xa;+ release(fmt : MessageFormatter) : void&#xa;  {calls reset() then returns to queue}&#xa;- createNew() : MessageFormatter&#xa;  {totalCreated++, new instance}&#xa;+ getAvailableCount() : int&#xa;+ getTotalCreated() : int" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="formpool"><mxGeometry x="0" y="110" width="300" height="146" as="geometry"/></mxCell>
+
+        <!-- MessageFormatter -->
+        <mxCell id="msgfmt" value="MessageFormatter" style="swimlane;startSize=22;fillColor=#f9dbc8;strokeColor=#d6781e;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="268" width="280" height="260" as="geometry"/>
+        </mxCell>
+        <mxCell id="mf_s" value="«pooled object» + «strategy»" style="text;html=1;fontSize=9;fontStyle=2;align=center;" vertex="1" parent="msgfmt"><mxGeometry x="0" y="22" width="280" height="14" as="geometry"/></mxCell>
+        <mxCell id="mf_sep1" value="" style="line;strokeColor=#d6781e;" vertex="1" parent="msgfmt"><mxGeometry x="0" y="40" width="280" height="6" as="geometry"/></mxCell>
+        <mxCell id="mf_a" value="- pattern : String&#xa;- usageCount : int" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="msgfmt"><mxGeometry x="0" y="46" width="280" height="44" as="geometry"/></mxCell>
+        <mxCell id="mf_sep2" value="" style="line;strokeColor=#d6781e;" vertex="1" parent="msgfmt"><mxGeometry x="0" y="94" width="280" height="6" as="geometry"/></mxCell>
+        <mxCell id="mf_m" value="+ MessageFormatter(pattern : String)&#xa;+ format(record : LogRecord) : String&#xa;  {usageCount++ then record.format(pattern)}&#xa;+ setPattern(pattern : String) : void&#xa;  {Strategy — swap algorithm at runtime}&#xa;+ reset() : void&#xa;  {resets usageCount for pool reuse}&#xa;+ getPattern() : String&#xa;+ getUsageCount() : int&#xa;+ toString() : String" style="text;html=1;align=left;spacingLeft=4;fontSize=10;" vertex="1" parent="msgfmt"><mxGeometry x="0" y="100" width="280" height="156" as="geometry"/></mxCell>
+
+        <!-- M5 Relations -->
+        <!-- Pool manages MessageFormatter -->
+        <mxCell id="m5r1" value="acquire() / release()" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;strokeColor=#d6781e;fontSize=10;" edge="1" parent="1" source="formpool" target="msgfmt"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <!-- Pool creates MessageFormatter -->
+        <mxCell id="m5r2" value="«creates»" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#d6781e;fontSize=9;" edge="1" parent="1" source="formpool" target="msgfmt">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1160" y="380"/>
+              <mxPoint x="1180" y="420"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <!-- MessageFormatter uses LogRecord (M2) -->
+        <mxCell id="m5r3" value="format uses M2" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#6c8ebf;fontSize=9;" edge="1" parent="1" source="msgfmt" target="logrecord"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <!-- FormatterPool uses LogConfiguration (M1) -->
+        <mxCell id="m5r4" value="reads format M1" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;endFill=0;dashed=1;strokeColor=#82b366;fontSize=9;" edge="1" parent="1" source="formpool" target="logconfig"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Pool lifecycle note -->
+        <mxCell id="note_pool" value="Object Pool Pattern:&#xa;1. acquire() → tira da ConcurrentLinkedQueue&#xa;2. Formata o LogRecord com MessageFormatter&#xa;3. release() → reset() + devolve à fila&#xa;&#xa;Strategy Pattern embutido:&#xa;setPattern() troca o algoritmo de&#xa;formatação em tempo de execução.&#xa;&#xa;Thread-safe: ConcurrentLinkedQueue garante&#xa;acesso seguro a partir de múltiplas threads." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fillColor=#fff2cc;strokeColor=#d6b656;align=left;fontSize=10;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="860" y="560" width="340" height="150" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
