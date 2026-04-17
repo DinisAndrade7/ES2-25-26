@@ -5,14 +5,6 @@ import logsystem.model.LogRecord;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-/**
- * M5 - Módulo de Otimização de Recursos
- * Padrão: Object Pool
- *
- * Reutiliza instâncias de MessageFormatter — objetos "pesados" que seriam
- * criados e destruídos repetidamente em cada registo de log.
- * O pool pré-cria objetos e devolve-os quando não estão em uso.
- */
 public class FormatterPool {
 
     private static final int POOL_SIZE = 5;
@@ -43,9 +35,7 @@ public class FormatterPool {
         return instance;
     }
 
-    /**
-     * Adquire um formatador do pool. Cria um novo se o pool estiver vazio.
-     */
+   
     public MessageFormatter acquire() {
         MessageFormatter formatter = available.poll();
         if (formatter == null) {
@@ -59,9 +49,7 @@ public class FormatterPool {
         return formatter;
     }
 
-    /**
-     * Devolve o formatador ao pool para reutilização futura.
-     */
+   
     public void release(MessageFormatter formatter) {
         inUse.remove(formatter);
         formatter.reset();
